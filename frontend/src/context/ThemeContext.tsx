@@ -11,7 +11,17 @@ const ThemeContext = createContext<Theme | undefined>(undefined);
 export const ThemeProvider = ({ children }: { children: React.ReactNode}) => {
     return (
         <ThemeContext.Provider value={theme}>
-            {children}
+            <div style={{
+                '--primary-color': theme.colors.primary,
+                '--secondary-color': theme.colors.secondary,
+                '--tertiary-color': theme.colors.tertiary,
+                '--font-family': theme.fonts.body,
+                '--font-size-small': theme.fontSizes.small,
+                '--font-size-medium': theme.fontSizes.medium,
+                '--font-size-large': theme.fontSizes.large,
+            } as React.CSSProperties}>
+                {children}
+            </div>
         </ThemeContext.Provider>
     );
 };
