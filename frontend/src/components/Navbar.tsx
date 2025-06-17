@@ -4,7 +4,7 @@ import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Logo from "../assets/logo.jpg";
 
 const links = [
-  { name: "Home", path: "/" },
+  { name: "Inicio", path: "/" },
   { name: "Estado de pago", path: "/payment-status" },
   { name: "Carnet de Socio", path: "/member-card" },
   { name: "Noticias", path: "/news" },
