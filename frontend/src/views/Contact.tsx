@@ -1,6 +1,6 @@
 import { theme } from "../theme/theme"
 
-  const Contacto = () => {
+  const Contact = () => {
   return (
     <div style={{ marginTop: '100px' }}>
       <h1 style={{ color: theme.colors.primary }}>Estado de pago</h1>
@@ -9,4 +9,4 @@ import { theme } from "../theme/theme"
   )
 }
 
-export default Contacto
+export default Contact

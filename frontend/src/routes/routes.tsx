@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import Login from '../views/Login'
-import Contacto from '../views/Contacto'
+import Contact from '../views/Contact'
 import MemberCard from '../views/MemberCard'
 import News from '../views/News'
 import Home from '../views/Home'
@@ -12,7 +12,7 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/member-card" element={<MemberCard />} />
         <Route path='/news' element={<News/>} />
-        <Route path='/contact' element={<Contacto/>} />
+        <Route path='/contact' element={<Contact/>} />
     </Routes>
     )
 }
