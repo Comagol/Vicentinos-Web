@@ -1,6 +1,6 @@
 import { theme } from "../theme/theme"
 
-const PaymentStatus = () => {
+  const Contacto = () => {
   return (
     <div style={{ marginTop: '100px' }}>
       <h1 style={{ color: theme.colors.primary }}>Estado de pago</h1>
@@ -9,4 +9,4 @@ const PaymentStatus = () => {
   )
 }
 
-export default PaymentStatus
+export default Contacto
