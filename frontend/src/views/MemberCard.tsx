@@ -1,7 +1,8 @@
+import CardMember from "../components/CardMember";
 
 const MemberCard = () => {
   return (
-    <div>MemberCard</div>
+    <CardMember />
   )
 }
 
