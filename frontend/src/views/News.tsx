@@ -1,7 +1,8 @@
+import NewsCard from "../components/NewsCard"
 
 const News = () => {
   return (
-    <div>News</div>
+    <NewsCard />
   )
 }
 
