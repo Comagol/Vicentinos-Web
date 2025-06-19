@@ -1,11 +1,8 @@
-import { theme } from "../theme/theme"
+import ContactForm from "../components/ContactForm"
 
   const Contact = () => {
   return (
-    <div style={{ marginTop: '100px' }}>
-      <h1 style={{ color: theme.colors.primary }}>Estado de pago</h1>
-      <p style={{ color: theme.colors.secondary }}>El estado de pago es: aqui ira el status</p>
-    </div>
+    <ContactForm />
   )
 }
 
