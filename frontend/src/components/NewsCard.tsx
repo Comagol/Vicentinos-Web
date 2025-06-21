@@ -1,7 +1,19 @@
 import { Box, Image, Text } from "@chakra-ui/react"
+import { useEffect, useState } from "react"
 
 
 const NewsCard = () => {
+  const [news, setNews] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:3000/news')
+      .then(response => response.json())
+      .then(data => setNews(data))
+      .catch(error => console.error('Error fetching news:', error))
+  }, [])
+
+  if (!news) return <div>Cargando noticias...</div>
+
   return (
     <Box
         marginY="50px"
