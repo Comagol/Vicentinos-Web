@@ -101,8 +101,8 @@ const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Aquí puedes agregar la lógica para enviar el formulario
-      // Por ejemplo, una llamada a tu API
+      // Aquí va la logica para enviar el formulario
+      // Por ejemplo llamada a la API
       console.log('Datos del formulario:', formData);
       
       // Simular envío
