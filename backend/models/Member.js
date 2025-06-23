@@ -6,6 +6,20 @@ const memberSchema = new mongoose.Schema({
         required: [true, 'El nombre es requerido'],
         trim: true
     },
+    lastname : {
+        type: String,
+        required: [true, 'El apellido es requerido'],
+        trim: true
+    },
+    birthdate: {
+        type: Date,
+        required: [true, 'La fecha de nacimiento es requerida']
+    },
+    gender: {
+        type: String,
+        enum: ['male', 'female', 'other'],
+        required: [true, 'El género es requerido']
+    },
     email: {
         type: String,
         required: [true, 'El email es requerido'],
@@ -33,11 +47,12 @@ const memberSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['member', 'admin', 'moderator'],
+        enum: ['socio activo/a', 'socio deportivo/a', 'benefactor', 'administrador'],
         default: 'member'
     },
     profileImage: {
-        type: String
+        type: String,
+        required: [true, 'La foto de perfil es obligatoria.']
     },
     address: {
         street: String,
