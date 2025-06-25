@@ -1,7 +1,7 @@
 import api from "./api";
 
 //Tipos para las noticias
-export interface News {
+export interface NewsItem {
     id: number;
     title: string;
     description: string;
@@ -12,7 +12,7 @@ export interface News {
 
 //Servicio para obtener las noticias
 export const newsService = {
-    getAllNews: async (): Promise<News[]> => {
+    getAllNews: async (): Promise<NewsItem[]> => {
         try {
             const response = await api.get('/news');
             return response.data;
@@ -23,7 +23,7 @@ export const newsService = {
     },
 
     //obtener una noticia por su id
-    getNewById: async (id: number): Promise<News> => {
+    getNewById: async (id: number): Promise<NewsItem> => {
         try {
             const response = await api.get(`/news/${id}`);
             return response.data;
@@ -34,7 +34,7 @@ export const newsService = {
     },
 
     //Crear una nueva noticia
-    createNews: async (newsData: Omit<News, 'id'>): Promise<News> => {
+    createNews: async (newsData: Omit<NewsItem, 'id'>): Promise<NewsItem> => {
         try {
             const response = await api.post('/news', newsData);
             return response.data;
@@ -45,7 +45,7 @@ export const newsService = {
     },
 
     // Actualizar una noticia
-    update: async (id: number, newsData: Partial<News>): Promise<News> => {
+    update: async (id: number, newsData: Partial<NewsItem>): Promise<NewsItem> => {
         try {
         const response = await api.put(`/news/${id}`, newsData);
         return response.data;
@@ -65,6 +65,5 @@ export const newsService = {
         }
     },
 };
-
 
 export default newsService;

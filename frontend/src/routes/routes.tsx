@@ -4,7 +4,7 @@ import Contact from '../views/Contact'
 import MemberCard from '../views/MemberCard'
 import News from '../views/News'
 import Home from '../views/Home'
-import Register from '../views/register'
+import Register from '../views/Register'
 
 const AppRoutes = () => {
     return (

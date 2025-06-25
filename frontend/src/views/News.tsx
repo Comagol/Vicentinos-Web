@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { Box, Grid, Text, Spinner, Center, Alert, AlertIcon } from "@chakra-ui/react"
 import NewsCard from "../components/NewsCard"
-import { newsService, type News } from "../services/newsService"
+import { newsService, type NewsItem } from "../services/newsService"
 
 const News = () => {
-  const [news, setNews] = useState<News[]>([])
+  const [news, setNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
