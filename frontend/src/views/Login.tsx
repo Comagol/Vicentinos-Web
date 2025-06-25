@@ -27,18 +27,16 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const toast = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Aquí irá la lógica de autenticación
     toast({
-      title: isLogin ? 'Iniciando sesión...' : 'Registrando usuario...',
+      title: 'Iniciando sesión...',
       status: 'info',
       duration: 2000,
       isClosable: true,
@@ -105,9 +103,7 @@ const Login = () => {
                 <Text color="gray.600" fontSize="sm">
                   {isForgotPassword 
                     ? 'Recupera tu contraseña' 
-                    : isLogin 
-                      ? 'Inicia sesión en tu cuenta' 
-                      : 'Crea tu cuenta'
+                    : 'Inicia sesión en tu cuenta'
                   }
                 </Text>
               </Box>
@@ -192,28 +188,8 @@ const Login = () => {
                   </FormControl>
                 )}
 
-                {!isLogin && !isForgotPassword && (
-                  <FormControl isRequired>
-                    <FormLabel color="gray.700" fontSize="sm" fontWeight="medium">
-                      Confirmar contraseña
-                    </FormLabel>
-                    <Input
-                      type="password"
-                      placeholder="••••••••"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      size="lg"
-                      borderRadius="md"
-                      _focus={{
-                        borderColor: 'primary',
-                        boxShadow: '0 0 0 1px var(--chakra-colors-primary)',
-                      }}
-                    />
-                  </FormControl>
-                )}
-
                 {/* Forgot Password Link */}
-                {isLogin && !isForgotPassword && (
+                {!isForgotPassword && (
                   <Flex w="full" justify="flex-end">
                     <Link
                       color="primary"
@@ -247,28 +223,26 @@ const Login = () => {
                 >
                   {isForgotPassword 
                     ? 'Enviar email de recuperación' 
-                    : isLogin 
-                      ? 'Iniciar sesión' 
-                      : 'Crear cuenta'
+                    : 'Iniciar sesión'
                   }
                 </Button>
               </VStack>
             </form>
 
-            {/* Toggle between Login/Register */}
+            {/* Toggle to Register */}
             {!isForgotPassword && (
               <HStack justify="center" mt={6}>
                 <Text color="gray.600" fontSize="sm">
-                  {isLogin ? '¿No tienes una cuenta?' : '¿Ya tienes una cuenta?'}
+                  ¿No tienes una cuenta?
                 </Text>
                 <Link
                   color="primary"
                   fontSize="sm"
                   fontWeight="medium"
-                  onClick={() => setIsLogin(!isLogin)}
+                  href="/register"
                   _hover={{ textDecoration: 'underline' }}
                 >
-                  {isLogin ? 'Regístrate' : 'Inicia sesión'}
+                  Regístrate
                 </Link>
               </HStack>
             )}
