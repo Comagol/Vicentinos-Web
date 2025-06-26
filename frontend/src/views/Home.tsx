@@ -14,15 +14,15 @@ const Home = () => {
       </Text>
       <Box w="full" h="400px" borderRadius="lg" overflow="hidden" boxShadow="lg" border="1px solid" borderColor="gray.200">
       <iframe
-            src="https://www.google.com.ar/maps/place/Club+Vicentinos+Hockey+y+Rugby/@-34.5483383,-58.7417128,17z/data=!3m1!4b1!4m6!3m5!1s0x95bc97d852255be5:0xb2683f04d9c04890!8m2!3d-34.5483383!4d-58.7391379!16s%2Fg%2F11b8v9rs5m?hl=es&entry=ttu&g_ep=EgoyMDI1MDYyMy4yIKXMDSoASAFQAw%3D%3D"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Ubicación del Club Vicentinos"
-          />
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.2060393370016!2d-58.74171282462192!3d-34.54833827297415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bc97d852255be5%3A0xb2683f04d9c04890!2sClub%20Vicentinos%20Hockey%20y%20Rugby!5e0!3m2!1ses!2sar!4v1750974908288!5m2!1ses!2sar"
+        width="100%"
+        height="100%"
+        style={{ border: 0 }}
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        title="Ubicación del Club Vicentinos"
+      />
       </Box>
       <Text>
         Dirección: Av Primera Junta 3369, San Miguel, Buenos Aires, Argentina
