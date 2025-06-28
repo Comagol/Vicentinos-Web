@@ -6,6 +6,14 @@ const Home = () => {
   <VStack spacing={6} p={8}>
     <Heading color="primary.500" fontSize="4xl" fontWeight="bold">Club Vicentinos Hockey y Rugby</Heading>
     <Box>
+      <Heading color="primary.500" fontSize="4xl" fontWeight="bold" textAlign="center" p={4}>
+        Nuestra historia
+      </Heading>
+      <Text p={4}>
+        Somos un club deportivo que se dedica a la práctica del hockey y el rugby. Donde nuestra principal tarea es la formacion de personas con valores y principios. Dejando amistades para toda la vida. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe fugiat nihil ipsam dignissimos amet, officia tenetur necessitatibus asperiores, ratione ad at iste nesciunt, ducimus magnam impedit hic praesentium commodi ut.
+      </Text>
+    </Box>
+    <Box>
       <Heading>
         Nuestra ubicación
       </Heading>
