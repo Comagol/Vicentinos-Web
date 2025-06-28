@@ -12,6 +12,9 @@ const Home = () => {
       <Text p={4}>
         Somos un club deportivo que se dedica a la práctica del hockey y el rugby. Donde nuestra principal tarea es la formacion de personas con valores y principios. Dejando amistades para toda la vida. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe fugiat nihil ipsam dignissimos amet, officia tenetur necessitatibus asperiores, ratione ad at iste nesciunt, ducimus magnam impedit hic praesentium commodi ut.
       </Text>
+      <Box w="full" h="400px" borderRadius="lg" overflow="hidden"  p={4} display="flex" justifyContent="center" alignItems="center">
+      <iframe width="70%" height="100%" src="https://www.youtube.com/embed/8IBRYGByDqY?si=GF0_ii_DY2e_UGm5" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+      </Box>
     </Box>
     <Box>
       <Heading>
