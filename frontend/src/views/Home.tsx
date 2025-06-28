@@ -20,8 +20,8 @@ const Home = () => {
       <Heading>
         Nuestra ubicación
       </Heading>
-      <Text>
-        Te invitamos a conocer nuestras instalaciones.
+      <Text p={4} textAlign="center">
+        Te invitamos a conocer nuestras instalaciones. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae sunt voluptatum exercitationem similique, non nemo dolorum ullam aut. Illum facilis quo nihil molestias temporibus, ea ab officiis ipsum. Quae, maxime.
       </Text>
       <Box w="full" h="400px" borderRadius="lg" overflow="hidden" boxShadow="lg" border="1px solid" borderColor="gray.200">
       <iframe
