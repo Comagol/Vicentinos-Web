@@ -5,6 +5,9 @@ const router = express.Router();
 // Get = obtener todos los socios
 router.get("/", MemberController.getAllMembers);
 
+// Get = obtener un socio por id
+router.get("/:id", MemberController.getMemberById);
+
 // Post = crear un nuevo socio
 router.post("/", (req, res) => {
     res.send("Hello World");
