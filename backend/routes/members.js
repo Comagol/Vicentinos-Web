@@ -9,9 +9,7 @@ router.get("/", MemberController.getAllMembers);
 router.get("/:id", MemberController.getMemberById);
 
 // Post = crear un nuevo socio
-router.post("/", (req, res) => {
-    res.send("Hello World");
-}); 
+router.post("/", MemberController.createMember); 
 
 // Put = actualizar un socio
 router.put("/:id", (req, res) => {
