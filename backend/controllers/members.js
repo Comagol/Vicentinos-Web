@@ -44,4 +44,22 @@ class MemberController {
         }
     };
 
+    //Metodo para actualizar valores de un socio
+    async updateMember(req, res) {
+        try {
+            const {id} = req.params;
+            const { firstName, lastName, email, birthDate, DNI, phone, address, city, zipCode} = req.body;
+            const member = await MemberController.findById(id);
+            if (!member) {
+                return res.status(404).json({ message: "Socio no encontrado"});
+        }
+        else {
+                const updateMember = await MemberController.update(id, member);
+                res.status(200).json(updateMember);
+            }
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    };
+
 }
