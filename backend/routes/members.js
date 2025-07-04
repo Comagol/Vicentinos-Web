@@ -12,9 +12,7 @@ router.get("/:id", MemberController.getMemberById);
 router.post("/", MemberController.createMember); 
 
 // Put = actualizar un socio
-router.put("/:id", (req, res) => {
-    res.send("Hello World");
-});
+router.put("/:id", MemberController.updateMember);
 
 // Delete = eliminar un socio
 router.delete("/:id", (req, res) => {
