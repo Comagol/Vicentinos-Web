@@ -15,8 +15,6 @@ router.post("/", MemberController.createMember);
 router.put("/:id", MemberController.updateMember);
 
 // Delete = eliminar un socio
-router.delete("/:id", (req, res) => {
-    res.send("Hello World");
-});
+router.delete("/:id", MemberController.deleteMember);
 
 export default router;
