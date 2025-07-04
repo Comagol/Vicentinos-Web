@@ -12,3 +12,6 @@ router.get("/:id", NewsController.getNewById);
 
 //Ruta Post para crear una noticia
 router.post("/", NewsController.createNews);
+
+//Ruta Put para actualizar una noticia
+router.put("/:id", NewsController.updateNews);
