@@ -8,4 +8,7 @@ const router = express.Router();
 router.get("/", NewsController.getAllNews);
 
 // Ruta Get para obtener una noticia por id
-router.get("/:id", NewsController.getNewById)
+router.get("/:id", NewsController.getNewById);
+
+//Ruta Post para crear una noticia
+router.post("/", NewsController.createNews);
