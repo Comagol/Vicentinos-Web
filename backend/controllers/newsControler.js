@@ -64,4 +64,20 @@ class NewsController {
         }
     };
 
+    //Metodo para eliminar una noticia
+    async deleteNew(req, res) {
+        try {
+            const {id} = req.params;
+            const news = await NewsController.findById(id);
+            if (!news) {
+                return res.status(404).json({ message: "Noticia no encontrada"});
+            }
+            else {
+                await NewsController.delete(id);
+                res.status(200).json({ message: "Noticia eliminada correctamente"});
+            }
+        } catch (error) {
+            res.status(500).json({ message: error.message});
+        }
+    };
 }
