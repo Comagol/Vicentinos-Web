@@ -62,4 +62,20 @@ class MemberController {
         }
     };
 
+    // Metodo para eliminar un socio
+    async deleteMember(req, res) {
+        try {
+            const {id} = req.params;
+            const member = await MemberController.findById(id);
+            if (!member) {
+                return res.status(404).json({ message: "Socio no encontrado"});
+            }
+            else {
+                await MemberController.delete(id);
+                res.status(200).json({ message: "Socio eliminado correctamente"});
+            }
+        } catch (error) {
+            res.status(500).json({ message: error.message});
+        }
+    }
 }
