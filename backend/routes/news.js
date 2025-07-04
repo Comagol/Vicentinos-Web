@@ -15,3 +15,6 @@ router.post("/", NewsController.createNews);
 
 //Ruta Put para actualizar una noticia
 router.put("/:id", NewsController.updateNews);
+
+//Ruta Delete para eliminar una noticia
+router.delete("/:id", NewsController.deleteNew);
