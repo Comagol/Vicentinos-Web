@@ -6,3 +6,6 @@ const router = express.Router();
 
 // Ruta Get para obtener todas las noticias
 router.get("/", NewsController.getAllNews);
+
+// Ruta Get para obtener una noticia por id
+router.get("/:id", NewsController.getNewById)
