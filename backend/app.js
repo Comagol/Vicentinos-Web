@@ -1,6 +1,6 @@
 // IMPORTO EL MODULO EXPRESS
-
 import express from "express";
+
 // CREO LA INSTANCIA DE EXPRESS
 const app = express();
 const PORT = process.env.PORT || 5000;

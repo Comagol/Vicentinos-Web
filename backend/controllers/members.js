@@ -1,3 +1,6 @@
+
+
+//Clase para manejar los metodos de los socios
 class MemberController {
     constructor() {
         this.members = [];
