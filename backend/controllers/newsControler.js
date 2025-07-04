@@ -46,4 +46,22 @@ class NewsController {
         }
     };
 
+    //Metodo para actualizar una noticia
+    async updateNews(req, res) {
+        try {
+            const {id} = req.params;
+            const {title, content, date, image} = req.body;
+            const news = await NewsController.findById(id);
+            if (!news) {
+                return res.status(404).json ({ message: "Noticia no encontrada"});
+            }
+            else {
+                const updateNews = await NewsController.update(id, news);
+                res.status(200).json(updateNews);
+            }
+        } catch (error) {
+            res.status(500).json({ message: error.message});
+        }
+    };
+
 }
