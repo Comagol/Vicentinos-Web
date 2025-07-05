@@ -2,6 +2,14 @@
 import dotenv from "dotenv";
 dotenv.config();    
 
+// IMPORTACION DE FILEURLTOURL Y DIRNAME
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// DEFINO EL NOMBRE DEL ARCHIVO Y EL DIRECTORIO
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 // IMPORTO EL MODULO EXPRESS
 import express from "express";
 
@@ -27,8 +35,11 @@ app.use(express.urlencoded({ extended: true }));
 app.set("views", path.join(__dirname, "views"));
 
 // IMPORTO LAS RUTAS
+import newsRoutes from "./routes/news.js";
+import MemberRoutes from "./routes/MemberRoutes.js";
+
 app.use("/api/news", newsRoutes);
-app.use("/api/users", userRoutes);
+app.use("/api/members", MemberRoutes);
 
 // DEFINO EL PUERTO
 const PORT = process.env.PORT || 5000;
