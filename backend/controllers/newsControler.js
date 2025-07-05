@@ -81,3 +81,5 @@ class NewsController {
         }
     };
 }
+
+export default NewsController;

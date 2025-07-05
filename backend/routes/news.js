@@ -18,3 +18,5 @@ router.put("/:id", NewsController.updateNews);
 
 //Ruta Delete para eliminar una noticia
 router.delete("/:id", NewsController.deleteNew);
+
+export default router;
