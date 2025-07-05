@@ -1,17 +1,18 @@
 // IMPORTACION DE LAS VARIABLES DE ENTORNO
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();    
 
 // IMPORTO EL MODULO EXPRESS
-const express = require("express");
+import express from "express";
 
 //IMPORTACION DE HTTP
-const http = require("http");
+import http from "http";
 
 // IMPORTACION DE PATH
-const path = require("path");
+import path from "path";
 
 //importacion de la base de datos
-const connectDB = require("./config/dbClient");
+import connectDB from "./config/dbClient.js";
 
 // CREO LA INSTANCIA DE EXPRESS
 const app = express();
