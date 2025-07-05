@@ -15,9 +15,19 @@ const connectDB = require("./config/dbClient");
 
 // CREO LA INSTANCIA DE EXPRESS
 const app = express();
+const server = http.createServer(app);
 
+// CONEXION A LA BASE DE DATOS
+connectDB();
 
+// IMPORTO LOS MIDDLEWARES
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.set("views", path.join(__dirname, "views"));
 
+// IMPORTO LAS RUTAS
+app.use("/api/news", newsRoutes);
+app.use("/api/users", userRoutes);
 
 
 const PORT = process.env.PORT || 5000;
