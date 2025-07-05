@@ -29,15 +29,12 @@ app.set("views", path.join(__dirname, "views"));
 app.use("/api/news", newsRoutes);
 app.use("/api/users", userRoutes);
 
-
+// DEFINO EL PUERTO
 const PORT = process.env.PORT || 5000;
 
-try {
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`)
-    })
-} catch (error) {
-    console.log(error)
-}
+// INICIO EL SERVIDOR
+server.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
+});
 
-export default app;
+module.exports = app;
