@@ -82,4 +82,4 @@ class NewsController {
     };
 }
 
-export default NewsController;
+export default new NewsController();
