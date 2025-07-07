@@ -1,4 +1,4 @@
-
+import NewsModel from "../models/newsModels.js";
 
 class NewsController {
     constructor() {
@@ -8,7 +8,7 @@ class NewsController {
     //MEtodo para obtener todas las noticias
     async getAllNews(req, res) {
         try {
-            const news = await NewsController.find();
+            const news = await NewsModel.find();
             res.status(200).json({ message: "Noticias obtenidas correctamente", news});
         } catch (error) {
             res.status(500).json({ message: error.message});
@@ -19,7 +19,7 @@ class NewsController {
     async getNewById(req, res) {
         try {
             const {id} = req.params;
-            const info = await NewsController.findById(id); 
+            const info = await NewsModel.findById(id); 
             if (!info) {
                 return res.status(404).json({ message: "Noticia no encontrada"});
             }
@@ -33,12 +33,12 @@ class NewsController {
     async createNews(req, res) {
         try {
             const {title, content, date, image} = req.body;
-            const news = await NewsController.find();
+            const news = await NewsModel.find();
             if (news.some(news => news.title === title)) {
                 return res.status(400).json({ message: "Ya existe una noticia con ese titulo"});
             }
             else {
-                const newNews = await NewsController.create(news);
+                const newNews = await NewsModel.create(news);
                 res.status(201).json(newNews);
             }
         } catch (error) {
@@ -51,12 +51,12 @@ class NewsController {
         try {
             const {id} = req.params;
             const {title, content, date, image} = req.body;
-            const news = await NewsController.findById(id);
+            const news = await NewsModel.findById(id);
             if (!news) {
                 return res.status(404).json ({ message: "Noticia no encontrada"});
             }
             else {
-                const updateNews = await NewsController.update(id, news);
+                const updateNews = await NewsModel.update(id, news);
                 res.status(200).json(updateNews);
             }
         } catch (error) {
@@ -68,12 +68,12 @@ class NewsController {
     async deleteNew(req, res) {
         try {
             const {id} = req.params;
-            const news = await NewsController.findById(id);
+            const news = await NewsModel.findById(id);
             if (!news) {
                 return res.status(404).json({ message: "Noticia no encontrada"});
             }
             else {
-                await NewsController.delete(id);
+                await NewsModel.delete(id);
                 res.status(200).json({ message: "Noticia eliminada correctamente"});
             }
         } catch (error) {
