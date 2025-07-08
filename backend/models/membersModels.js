@@ -12,6 +12,41 @@ const memberSchema = new mongoose.Schema({
     email: {
         type: String,
         requires: true,
+    },
+    phone: {
+        type: Number,
+        requires: true,
+    },
+    address: {
+        type: String,
+        requires: true,
+    },
+    city: {
+        type: String,
+        requires: true,
+    },
+    state: {
+        type: String,
+        requires: false,
+    },
+    zip: {
+        type: Number,
+        requires: false,
+    },
+    country: {
+        type: String,
+        requires: false,
+    },
+    memberId: {
+        type: String,
+        requires: true,
+    },
+    signUpDate: {
+        type: Date,
+        requires: true,
+    },
+    status: {
+        type: String,
     }
 })
 
