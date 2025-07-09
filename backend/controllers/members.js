@@ -1,4 +1,4 @@
-
+import MemberModel from "../models/membersModels.js";
 
 //Clase para manejar los metodos de los socios
 class MemberController {
@@ -9,7 +9,7 @@ class MemberController {
     //Metodo para obtener todos los socios
     async getAllMembers(req, res) {
         try {
-            const members = await MemberController.find();
+            const members = await MemberModel.find();
             res.status(200).json(members);
         } catch (error) {
             res.status(500).json({ message: error.message });
@@ -33,13 +33,14 @@ class MemberController {
     //Metodo para crear un socio nuevo
     async createMember(req, res) {
         try {
-            const member ={firstName, lastName, email, birthDate, DNI, phone, address, city, zipCode} = req.body;
-            const members = await MemberController.getAllMembers();
+            const { firstName, lastName, email, phone, birthDate, DNI, address, city, zipCode, memberId, signUpDate } = req.body;
+            const member = { firstName, lastName, email, phone, birthDate, DNI, address, city, zipCode, memberId, signUpDate };
+            const members = await MemberModel.find();   
             if (members.some(member => member.DNI === DNI)) {
                 return res.status(400).json({ message: "Ya existe un socio con ese DNI"});
             }
             else {
-                const newMember = await MemberController.create(member);
+                const newMember = await MemberModel.create(member);
                 res.status(201).json(newMember);
             }
         } catch (error) {
