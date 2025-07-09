@@ -13,6 +13,14 @@ const memberSchema = new mongoose.Schema({
         type: String,
         requires: true,
     },
+    birthDate: {
+        type: Date,
+        requires: true,
+    },
+    DNI: {
+        type: Number,
+        requires: true,
+    },
     phone: {
         type: Number,
         requires: true,
