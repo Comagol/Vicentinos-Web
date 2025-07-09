@@ -38,7 +38,7 @@ class NewsController {
                 return res.status(400).json({ message: "Ya existe una noticia con ese titulo"});
             }
             else {
-                const newNews = await NewsModel.create(news);
+                const newNews = await NewsModel.create({ title, content, date, image });
                 res.status(201).json(newNews);
             }
         } catch (error) {
