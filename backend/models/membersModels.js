@@ -12,6 +12,7 @@ const memberSchema = new mongoose.Schema({
     email: {
         type: String,
         requires: true,
+        unique: true,
     },
     birthDate: {
         type: Date,
@@ -20,6 +21,7 @@ const memberSchema = new mongoose.Schema({
     DNI: {
         type: Number,
         requires: true,
+        unique: true,
     },
     phone: {
         type: Number,
