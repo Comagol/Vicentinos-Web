@@ -20,7 +20,7 @@ class MemberController {
     async getMemberById(req, res) {
         try {
             const {id} =req.params;
-            const member = await MemberController.findById(id);
+            const member = await MemberModel.findById(id);
             if (!member) {
                 return res.status(404).json({ message: "Socio no encontrado"});
             }
@@ -53,12 +53,12 @@ class MemberController {
         try {
             const {id} = req.params;
             const { firstName, lastName, email, birthDate, DNI, phone, address, city, zipCode} = req.body;
-            const member = await MemberController.findById(id);
+            const member = await MemberModel.findById(id);
             if (!member) {
                 return res.status(404).json({ message: "Socio no encontrado"});
         }
         else {
-                const updateMember = await MemberController.update(id, member);
+                const updateMember = await MemberModel.update(id, member);
                 res.status(200).json(updateMember);
             }
         } catch (error) {
@@ -70,12 +70,12 @@ class MemberController {
     async deleteMember(req, res) {
         try {
             const {id} = req.params;
-            const member = await MemberController.findById(id);
+            const member = await MemberModel.findById(id);
             if (!member) {
                 return res.status(404).json({ message: "Socio no encontrado"});
             }
             else {
-                await MemberController.delete(id);
+                await MemberModel.delete(id);
                 res.status(200).json({ message: "Socio eliminado correctamente"});
             }
         } catch (error) {
