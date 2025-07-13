@@ -32,7 +32,7 @@ class NewsController {
     //Metodo para crear una noticia
     async createNews(req, res) {
         try {
-            const {title, content, date, image} = req.body;
+            const { title, content, date, image} = req.body;
             const news = await NewsModel.find();
             if (news.some(news => news.title === title)) {
                 return res.status(400).json({ message: "Ya existe una noticia con ese titulo"});
@@ -68,8 +68,8 @@ class NewsController {
     async deleteNew(req, res) {
         try {
             const {id} = req.params;
-            const news = await NewsModel.findById(id);
-            if (!news) {
+            const deletedNews = await NewsModel.find(id);
+            if (!deletedNews) {
                 return res.status(404).json({ message: "Noticia no encontrada"});
             }
             else {
