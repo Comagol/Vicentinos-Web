@@ -6,6 +6,9 @@ dotenv.config();
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
+//IMPORTO COOKIE PARSER 
+import cookieParser from "cookie-parser";
+
 // DEFINO EL NOMBRE DEL ARCHIVO Y EL DIRECTORIO
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -32,6 +35,7 @@ connectDB();
 // IMPORTO LOS MIDDLEWARES
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.set("views", path.join(__dirname, "views"));
 
 // IMPORTO LAS RUTAS
