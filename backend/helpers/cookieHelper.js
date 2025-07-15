@@ -10,3 +10,8 @@ export const authCookieOptions = {
 export function setAuthCookie(res, token) {
   res.cookie("authToken", token, authCookieOptions);
 };
+
+//Funcion para eliminar la cookie de autenticacion
+export function deleteAuthCookie(res) {
+  res.clearCookie("authToken", authCookieOptions);
+};
