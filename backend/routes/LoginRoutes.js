@@ -1,5 +1,5 @@
 import express from "express";
-import LoginController from "../controllers/login.js";
+import AuthController from "../controllers/AuthController.js";
 import authMiddleware from "../middlewares/auth.js";
 import { setAuthCookie } from "../helpers/cookieHelper.js";
 
@@ -7,4 +7,4 @@ import { setAuthCookie } from "../helpers/cookieHelper.js";
 const router = express.Router();
 
 //Ruta para el login
-router.post("/", LoginController.login);
+router.post("/", AuthController.login);
