@@ -1,6 +1,6 @@
 //Controlador para la autenticacion
 
-import User from "../models/User.js";
+import AuthModel from "../models/UserModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { setAuthCookie, deleteAuthCookie } from "../helpers/cookieHelper.js";
@@ -14,8 +14,17 @@ class AuthController {
   async login(req, res) {
     try {
       const { email, password } = req.body;
+
+      //1. Buscando el mail del supuesto usuario en la base de datos.
       const userToAuth = await AuthModel.findOne({email})
       if (!userToAuth) return res.status(401).json({ message: "Usuario no encontrado"});
+
+      //2. verificando la constraseña del supuesto usuario en la base de datos.
+      const valid = await bcrypt.compare(password, userToAuth.password);
+      if (!valid) return res.status(401).json({ message: "Contrasela incorrecta"});
+
+      //3. Genero el token JWT
+      const token = jwt.sign({ id: userToAuth.id, email: userToAuth.email }, SECRET, { expiresIn: "1h"});
     } catch (error) {
       res.status(500).json({ message: "Error al registrar usuario" });
     }
