@@ -37,12 +37,9 @@ class AuthController {
   };
 
   async logout(req, res) {
-    try {
-      
-    } catch (error) {
-      
-    }
-  }
-}
+    deleteAuthCookie(res);
+    res.json({ message: "Logout exitoso"});
+  };
+};
 
 export default new AuthController();
