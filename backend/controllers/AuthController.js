@@ -21,7 +21,7 @@ class AuthController {
 
       //2. verificando la constraseña del supuesto usuario en la base de datos.
       const valid = await bcrypt.compare(password, userToAuth.password);
-      if (!valid) return res.status(401).json({ message: "Contrasela incorrecta"});
+      if (!valid) return res.status(401).json({ message: "Contraseña incorrecta"});
 
       //3. Genero el token JWT
       const token = jwt.sign({ id: userToAuth.id, email: userToAuth.email }, SECRET, { expiresIn: "1h"});
