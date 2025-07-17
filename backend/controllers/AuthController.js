@@ -40,6 +40,35 @@ class AuthController {
     deleteAuthCookie(res);
     res.json({ message: "Logout exitoso"});
   };
+
+  async register(req, res) {
+    try {
+      const {email, password} = req.body;
+
+      // verifico si el usuario ya existe.
+      const existingUser = await AuthModel.findOne({ email });
+      if(existingUser) {
+        return res.status(400).json({ message: "El email ya esta registrado"});
+      }
+
+      // Hasheo la contraseña
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // Creo el usuario
+      const newUser = new AuthModel({
+        email,
+        password: hashedPassword,
+      });
+
+      await newUser.save();
+
+      //luego voy a agregar que se genere el token
+
+      res.status(201).json({ message: "usuario registrado exitosamente" });
+    } catch (error) {
+      res.status(500).json({ message: "Error en el servidor"});
+    }
+  };
 };
 
 export default new AuthController();
