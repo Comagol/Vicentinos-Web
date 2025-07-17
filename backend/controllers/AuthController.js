@@ -25,8 +25,14 @@ class AuthController {
 
       //3. Genero el token JWT
       const token = jwt.sign({ id: userToAuth.id, email: userToAuth.email }, SECRET, { expiresIn: "1h"});
+
+      //4. Seteo la cookie
+      setAuthCookie(res, token);
+
+      //5. Respuesta al servidor
+      res.json({ message: "Login exitoso" });
     } catch (error) {
-      res.status(500).json({ message: "Error al registrar usuario" });
+      res.status(500).json({ message: "Error en el servidor" });
     }
   };
 
