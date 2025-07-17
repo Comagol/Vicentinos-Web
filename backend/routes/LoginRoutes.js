@@ -7,4 +7,5 @@ import { setAuthCookie } from "../helpers/cookieHelper.js";
 const router = express.Router();
 
 //Ruta para el login
-router.post("/", AuthController.login);
+router.post("/login", AuthController.login);
+router.post("/logout", AuthController.logout)
