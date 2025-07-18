@@ -41,9 +41,11 @@ app.set("views", path.join(__dirname, "views"));
 // IMPORTO LAS RUTAS
 import newsRoutes from "./routes/news.js";
 import MemberRoutes from "./routes/MemberRoutes.js";
+import LoginRoutes from "./routes/LoginRoutes.js";
 
 app.use("/api/news", newsRoutes);
 app.use("/api/members", MemberRoutes);
+app.use("api/auth", LoginRoutes)
 
 // DEFINO EL PUERTO
 const PORT = process.env.PORT || 5000;
