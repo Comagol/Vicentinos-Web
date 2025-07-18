@@ -1,14 +1,22 @@
+//importo jwt
+import jwt from "jsonwebtoken";
+
+const SECRET  = process.env.JWT_SECRET || "CLAVE_SECRETA";
+
 function authMiddleware(req, res, next) {
-  const token = req.headers['authorization'];
+  const token = req.cookie.authToken;
   if (!token) {
     return res.status(401).json({ message: 'No se proporcionó un token de autenticación' });
   }
-  // Voy a dejar un token arcodeado en el backend
-  const tokenCodificado = '1234567890';
-  if (token !== tokenCodificado) {
-    return res.status(401).json({ message: 'Token de autenticacion invalido' });
+  
+  try {
+    const decoded = jwt.verify(token, SECRET);
+    req.user = decoded;
+    next();
   }
-  next();
+  catch (error){
+    return res.status(401).json({ message: "Token de atenticacion invalido"});
+  }
 }
 
 export default authMiddleware;
