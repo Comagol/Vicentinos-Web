@@ -8,6 +8,7 @@ const links = [
   { name: "Contacto", path: "/contact" },
   { name: "Carnet de Socio", path: "/member-card" },
   { name: "Noticias", path: "/news" },
+  { name: "Inicio Sesion", path: "/login"},
 ];
 
 const Navbar = () => {

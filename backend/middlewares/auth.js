@@ -4,10 +4,10 @@ import jwt from "jsonwebtoken";
 const SECRET  = process.env.JWT_SECRET || "CLAVE_SECRETA";
 
 function authMiddleware(req, res, next) {
-  if (!req.cookie){
+  if (!req.cookies){
     return res.status(401).json({ message: "No se encontraron las cookies en la petición"})
   }
-  const token = req.cookie.authToken;
+  const token = req.cookies.authToken;
   if (!token) {
     return res.status(401).json({ message: 'No se proporcionó un token de autenticación' });
   }
