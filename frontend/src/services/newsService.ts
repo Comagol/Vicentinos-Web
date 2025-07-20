@@ -15,7 +15,7 @@ export const newsService = {
     getAllNews: async (): Promise<NewsItem[]> => {
         try {
             const response = await api.get('/news');
-            return response.data;
+            return response.data.news;
         } catch (error) {
             console.error('Error fetching news:', error);
             throw error;
@@ -26,7 +26,7 @@ export const newsService = {
     getNewById: async (id: number): Promise<NewsItem> => {
         try {
             const response = await api.get(`/news/${id}`);
-            return response.data;
+            return response.data.news;
         } catch (error) {
             console.error('error fetching news by id:', error);
             throw error;
@@ -37,7 +37,7 @@ export const newsService = {
     createNews: async (newsData: Omit<NewsItem, 'id'>): Promise<NewsItem> => {
         try {
             const response = await api.post('/news', newsData);
-            return response.data;
+            return response.data.news;
         } catch (error) {
             console.error('Error creating news', error);
             throw error;
@@ -48,7 +48,7 @@ export const newsService = {
     update: async (id: number, newsData: Partial<NewsItem>): Promise<NewsItem> => {
         try {
         const response = await api.put(`/news/${id}`, newsData);
-        return response.data;
+        return response.data.news;
         } catch (error) {
         console.error(`Error updating news with id ${id}:`, error);
         throw error;
