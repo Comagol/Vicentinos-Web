@@ -2,11 +2,11 @@ import api from "./api";
 
 //Tipos para las noticias
 export interface NewsItem {
-    id: number;
+    _id: string;
     title: string;
     description: string;
     image: string;
-    date: string;
+    date: Date;
     content: string;
 }
 
