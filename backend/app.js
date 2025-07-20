@@ -25,6 +25,9 @@ import path from "path";
 //importacion de la base de datos
 import connectDB from "./config/dbClient.js";
 
+//importacion de CORS
+import cors from 'cors';
+
 // CREO LA INSTANCIA DE EXPRESS
 const app = express();
 const server = http.createServer(app);
@@ -38,6 +41,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set("views", path.join(__dirname, "views"));
 
+app.use(cors ({
+    origin: 'http://localhost:5173',
+    credentials: true
+}))
+
 // IMPORTO LAS RUTAS
 import newsRoutes from "./routes/news.js";
 import MemberRoutes from "./routes/MemberRoutes.js";
@@ -46,6 +54,8 @@ import LoginRoutes from "./routes/LoginRoutes.js";
 app.use("/api/news", newsRoutes);
 app.use("/api/members", MemberRoutes);
 app.use("/api", LoginRoutes)
+
+
 
 // DEFINO EL PUERTO
 const PORT = process.env.PORT || 5000;
