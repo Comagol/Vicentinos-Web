@@ -1,13 +1,15 @@
 import CardMember from "../components/CardMember";
-import { Center, Flex, Text } from "@chakra-ui/react";
+import { Box, Center, Flex, Text } from "@chakra-ui/react";
 
 const MemberCard = () => {
   return (
     <Flex alignSelf="center">
-      <Center>
-      <Text fontSize="large">Carnet de Socio</Text>
+      <Box>
+      <Center margin="25px">
+      <Text fontSize="large" color="primary.500" fontWeight="bold">Carnet de Socio</Text>
       </Center>
       <CardMember />
+      </Box>
     </Flex>
   )
 }

@@ -43,14 +43,14 @@ const CardMember: React.FC<CardMemberProps> = ({
       justifySelf="center"
       marginTop="50px"
     >
-      <CardBody p={6}>
-        <VStack spacing={4} align="stretch">
+      <CardBody p={6} bgColor="softBlue" borderRadius="10px">
+        <VStack spacing={4} align="stretch" >
           {/* Header */}
           <Box textAlign="center" pb={2}>
             <Text 
               fontSize="large" 
               fontWeight="bold" 
-              color="primary"
+              color="accent"
               fontFamily="heading"
             >
               Carnet Socio
@@ -149,9 +149,11 @@ const CardMember: React.FC<CardMemberProps> = ({
               <Button
                 variant="solid"
                 size="md"
-                bg="secondary"
-                color="white"
-                _hover={{ bg: "primary", color: "white" }}
+                bg="background"
+                color="accent"
+                border="2px solid"
+                borderColor="midBlue"
+                _hover={{ bg: "primary", color: "accent" }}
                 _active={{ bg: "primary" }}
                 fontWeight="bold"
                 onClick={onPayFee}
@@ -195,19 +197,16 @@ const CardMember: React.FC<CardMemberProps> = ({
                     textAlign="center"
                     fontFamily="body"
                   >
-
+                    {memberName}
                   </Text>
                 )}
               </Box>
-              
-              <Text 
-                fontSize="small" 
-                color="gray.600"
-                textAlign="center"
-                fontFamily="body"
-              >
-                Foto del socio
-              </Text>
+    
+              <Box>
+                <Text color="accent" opacity="0.9">
+                  Club Vicentinos
+                </Text>
+              </Box>
             </VStack>
           </Flex>
         </VStack>
