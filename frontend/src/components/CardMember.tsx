@@ -51,7 +51,7 @@ const CardMember: React.FC<CardMemberProps> = ({
             <Text 
               fontSize="large" 
               fontWeight="bold" 
-              color="accent"
+              color="primary"
               fontFamily="heading"
             >
               Carnet Socio
