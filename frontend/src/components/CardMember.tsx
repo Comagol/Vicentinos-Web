@@ -11,6 +11,7 @@ import {
   Badge,
   Divider
 } from '@chakra-ui/react';
+import Logot from "../assets/logoT.png";
 
 interface CardMemberProps {
   memberType?: string;
@@ -200,10 +201,11 @@ const CardMember: React.FC<CardMemberProps> = ({
                 )}
               </Box>
     
-              <Box>
+              <Box >
                 <Text color="primary" opacity="0.9">
                   Club Vicentinos
                 </Text>
+                <Image src={Logot} h="44px" mx="auto" display="block" />
               </Box>
             </VStack>
           </Flex>
