@@ -1,7 +1,7 @@
 import { Box, Flex, IconButton, useDisclosure, Button, Image, Stack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import Logo from "../assets/logo.jpg";
+import Logo from "../assets/logoT.png";
 
 const links = [
   { name: "Inicio", path: "/" },

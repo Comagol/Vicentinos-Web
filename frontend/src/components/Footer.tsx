@@ -1,12 +1,16 @@
-import Logo from '../assets/logo.jpg';
+import Logo from '../assets/logoT.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { Box, Image, Text, Link as ChakraLink } from "@chakra-ui/react";
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
     <Box bg="primary" px={4} color="white" boxShadow="sm" py={4} display="flex" alignItems="center" gap={4} justifyContent="space-between">
+        <Link to="/">
+        
         <Image src={Logo} alt="logo" h="44px" />
+        </Link>
         <Box display="flex" flexDirection="column" gap={2}>
           <Text>Copyright 2025 Club Vicentinos</Text>
           <Text>Todos los derechos reservados</Text>
