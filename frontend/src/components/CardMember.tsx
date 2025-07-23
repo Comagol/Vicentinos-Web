@@ -149,11 +149,9 @@ const CardMember: React.FC<CardMemberProps> = ({
               <Button
                 variant="solid"
                 size="md"
-                bg="background"
-                color="accent"
-                border="2px solid"
-                borderColor="midBlue"
-                _hover={{ bg: "primary", color: "accent" }}
+                bg="secondary"
+                color="white"
+                _hover={{ bg: "primary", color: "white" }}
                 _active={{ bg: "primary" }}
                 fontWeight="bold"
                 onClick={onPayFee}
@@ -203,7 +201,7 @@ const CardMember: React.FC<CardMemberProps> = ({
               </Box>
     
               <Box>
-                <Text color="accent" opacity="0.9">
+                <Text color="primary" opacity="0.9">
                   Club Vicentinos
                 </Text>
               </Box>
