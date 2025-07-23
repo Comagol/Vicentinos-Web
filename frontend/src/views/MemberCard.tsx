@@ -1,9 +1,10 @@
 import CardMember from "../components/CardMember";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 const MemberCard = () => {
   return (
     <Flex alignSelf="center">
+      <Text>Carnet de Socio</Text>
       <CardMember />
     </Flex>
   )
