@@ -84,11 +84,10 @@ const Login = () => {
             <VStack spacing={6} mb={8}>
               <Box textAlign="center">
                 <Image
-                  src="/src/assets/logo.jpg"
+                  src="/src/assets/logoT.png"
                   alt="Club Vicentinos Logo"
                   boxSize="80px"
                   mx="auto"
-                  borderRadius="full"
                   objectFit="cover"
                   fallbackSrc="https://via.placeholder.com/80x80/073362/FFFFFF?text=CV"
                 />
