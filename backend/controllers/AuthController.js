@@ -13,7 +13,7 @@ class AuthController {
   //Metodo para el registro
   async login(req, res) {
     try {
-      const { email, password } = req.body;
+      const { email, password, role } = req.body;
 
       //1. Buscando el mail del supuesto usuario en la base de datos.
       const userToAuth = await AuthModel.findOne({email})
@@ -24,7 +24,7 @@ class AuthController {
       if (!valid) return res.status(401).json({ message: "Contraseña incorrecta"});
 
       //3. Genero el token JWT
-      const token = jwt.sign({ id: userToAuth.id, email: userToAuth.email }, SECRET, { expiresIn: "1h"});
+      const token = jwt.sign({ id: userToAuth.id, email: userToAuth.email, role: userToAuth.role }, SECRET, { expiresIn: "1h"});
 
       //4. Seteo la cookie
       setAuthCookie(res, token);

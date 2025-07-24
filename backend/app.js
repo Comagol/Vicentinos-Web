@@ -50,10 +50,12 @@ app.use(cors ({
 import newsRoutes from "./routes/news.js";
 import MemberRoutes from "./routes/MemberRoutes.js";
 import LoginRoutes from "./routes/LoginRoutes.js";
+import NavLinksRoutes from "./routes/NavLinksRotes.js"
 
 app.use("/api/news", newsRoutes);
 app.use("/api/members", MemberRoutes);
 app.use("/api", LoginRoutes)
+app.use("/api", NavLinksRoutes)
 
 
 
