@@ -1,5 +1,4 @@
 import { Box, Image, Text } from "@chakra-ui/react"
-import type { News } from "../services/newsService"
 
 interface NewsCardProps {
   news: News;

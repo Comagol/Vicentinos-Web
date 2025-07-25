@@ -77,7 +77,7 @@ const News = () => {
         justifyItems="center"
       >
         {news.map((newsItem) => (
-          <NewsCard key={newsItem.id} news={newsItem} />
+          <NewsCard key={newsItem._id} news={newsItem} />
         ))}
       </Grid>
     </Box>
