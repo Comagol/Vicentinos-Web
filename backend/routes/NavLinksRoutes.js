@@ -1,5 +1,5 @@
 import express from 'express';
-import NavLinksController from '../controllers/NavLinksController';
+import NavLinksController from '../controllers/NavLinksController.js';
 
 const router = express.Router();
 

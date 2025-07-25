@@ -1,30 +1,42 @@
+import { useEffect, useState } from "react";
 import { Box, Flex, IconButton, useDisclosure, Button, Image, Stack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Logo from "../assets/logoT.png";
+import axios from "axios";
 
-const links = [
-  { name: "Inicio", path: "/" },
-  { name: "Contacto", path: "/contact" },
-  { name: "Carnet de Socio", path: "/member-card" },
-  { name: "Noticias", path: "/news" },
-  { name: "Inicio Sesion", path: "/login"},
-];
+// Defino el tipo para los links
+interface NavLink {
+  name: string;
+  path: string;
+}
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [links, setLinks] = useState<NavLink[]>([]);
+
+  useEffect(() => {
+    axios.get("/api/nav-links", { withCredentials: true })
+      .then(res => {
+        console.log("Links recibidos:", res.data);
+        setLinks(res.data);
+      })
+      .catch((err) => {
+        console.error("Error obteniendo links:", err);
+        setLinks([]);
+      });
+  }, []);
 
   return (
     <Box bg="primary" px={4} color="white" boxShadow="sm">
       <Flex h={16} alignItems="center" justifyContent="space-between">
-        {/* Logo */}
         <Link to="/">
           <Image src={Logo} alt="logo" h="44px" />
         </Link>
 
         {/* Desktop menu */}
         <Flex as="nav" gap={2} display={{ base: "none", md: "flex" }}>
-          {links.map((link) => (
+          {Array.isArray(links) && links.map((link) => (
             <Button
               as={Link}
               to={link.path}
@@ -55,7 +67,7 @@ const Navbar = () => {
       {isOpen && (
         <Box pb={4} display={{ md: "none" }}>
           <Stack as="nav" spacing={1}>
-            {links.map((link) => (
+            {Array.isArray(links) && links.map((link) => (
               <Button
                 as={Link}
                 to={link.path}
