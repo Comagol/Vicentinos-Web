@@ -8,7 +8,11 @@ export interface LoginData {
 export interface RegisterData {
   email: string;
   password: string;
-  role?: string;
+  nombre: string;
+  apellido: string;
+  telefono?: string;
+  direccion?: string;
+  fechaNacimiento?: string;
 }
 
 export const loginService = {

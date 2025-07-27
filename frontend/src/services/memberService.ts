@@ -30,12 +30,12 @@ export interface UpdateMemberData {
 
 export const memberService = {
   getCurrentMember: async (): Promise<{ member: MemberData }> => {
-    const response = await api.get("/members/current");
+    const response = await api.get("/members/current", { withCredentials: true });
     return response.data;
   },
 
   updateMember: async (data: UpdateMemberData): Promise<{ message: string; member: MemberData }> => {
-    const response = await api.put("/members/current", data);
+    const response = await api.put("/members/current", data, { withCredentials: true });
     return response.data;
   }
 };

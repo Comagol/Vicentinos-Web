@@ -26,13 +26,17 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [direccion, setDireccion] = useState('');
+  const [fechaNacimiento, setFechaNacimiento] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validar que las contraseñas coincidan
     if (password !== confirmPassword) {
       toast({
         title: 'Error',
@@ -47,7 +51,15 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) => {
     setIsLoading(true);
 
     try {
-      await loginService.register({ email, password });
+      await loginService.register({ 
+        email, 
+        password, 
+        nombre, 
+        apellido, 
+        telefono, 
+        direccion, 
+        fechaNacimiento 
+      });
       
       toast({
         title: '¡Registro exitoso!',
@@ -57,7 +69,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) => {
         isClosable: true,
       });
 
-      // Redirigir al login después del registro exitoso
       onSwitchToLogin();
     } catch (error: any) {
       toast({
@@ -78,9 +89,46 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) => {
         Crea tu cuenta para acceder a todas las funcionalidades
       </Text>
 
-      {/* Form */}
       <form onSubmit={handleSubmit} style={{ width: '100%' }}>
         <VStack spacing={4}>
+          {/* Nombre y Apellido */}
+          <HStack spacing={4} w="full">
+            <FormControl isRequired>
+              <FormLabel color="gray.700" fontSize="sm" fontWeight="medium">
+                Nombre
+              </FormLabel>
+              <Input
+                placeholder="Tu nombre"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                size="lg"
+                borderRadius="md"
+                _focus={{
+                  borderColor: 'primary',
+                  boxShadow: '0 0 0 1px var(--chakra-colors-primary)',
+                }}
+              />
+            </FormControl>
+
+            <FormControl isRequired>
+              <FormLabel color="gray.700" fontSize="sm" fontWeight="medium">
+                Apellido
+              </FormLabel>
+              <Input
+                placeholder="Tu apellido"
+                value={apellido}
+                onChange={(e) => setApellido(e.target.value)}
+                size="lg"
+                borderRadius="md"
+                _focus={{
+                  borderColor: 'primary',
+                  boxShadow: '0 0 0 1px var(--chakra-colors-primary)',
+                }}
+              />
+            </FormControl>
+          </HStack>
+
+          {/* Email */}
           <FormControl isRequired>
             <FormLabel color="gray.700" fontSize="sm" fontWeight="medium">
               Correo electrónico
@@ -99,6 +147,62 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) => {
             />
           </FormControl>
 
+          {/* Teléfono y Fecha de Nacimiento */}
+          <HStack spacing={4} w="full">
+            <FormControl>
+              <FormLabel color="gray.700" fontSize="sm" fontWeight="medium">
+                Teléfono
+              </FormLabel>
+              <Input
+                placeholder="Tu teléfono"
+                value={telefono}
+                onChange={(e) => setTelefono(e.target.value)}
+                size="lg"
+                borderRadius="md"
+                _focus={{
+                  borderColor: 'primary',
+                  boxShadow: '0 0 0 1px var(--chakra-colors-primary)',
+                }}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel color="gray.700" fontSize="sm" fontWeight="medium">
+                Fecha de Nacimiento
+              </FormLabel>
+              <Input
+                type="date"
+                value={fechaNacimiento}
+                onChange={(e) => setFechaNacimiento(e.target.value)}
+                size="lg"
+                borderRadius="md"
+                _focus={{
+                  borderColor: 'primary',
+                  boxShadow: '0 0 0 1px var(--chakra-colors-primary)',
+                }}
+              />
+            </FormControl>
+          </HStack>
+
+          {/* Dirección */}
+          <FormControl>
+            <FormLabel color="gray.700" fontSize="sm" fontWeight="medium">
+              Dirección
+            </FormLabel>
+            <Input
+              placeholder="Tu dirección"
+              value={direccion}
+              onChange={(e) => setDireccion(e.target.value)}
+              size="lg"
+              borderRadius="md"
+              _focus={{
+                borderColor: 'primary',
+                boxShadow: '0 0 0 1px var(--chakra-colors-primary)',
+              }}
+            />
+          </FormControl>
+
+          {/* Contraseñas */}
           <FormControl isRequired>
             <FormLabel color="gray.700" fontSize="sm" fontWeight="medium">
               Contraseña

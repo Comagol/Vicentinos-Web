@@ -1,17 +1,17 @@
-import CardMember from "../components/CardMember";
-import { Box, Center, Flex, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+} from '@chakra-ui/react';
+import CardMember from '../components/CardMember';
 
 const MemberCard = () => {
   return (
-    <Flex alignSelf="center">
-      <Box>
-      <Center margin="25px">
-      <Text fontSize="large" color="primary.500" fontWeight="bold">Carnet de Socio</Text>
-      </Center>
-      <CardMember />
-      </Box>
-    </Flex>
-  )
-}
+    <Box minH="100vh" bg="gray.50" py={8}>
+      <Container maxW="md">
+        <CardMember />
+      </Container>
+    </Box>
+  );
+};
 
-export default MemberCard
+export default MemberCard;
