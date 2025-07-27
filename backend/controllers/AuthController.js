@@ -1,6 +1,6 @@
 //Controlador para la autenticacion
 
-import AuthModel from "../models/UserModel.js";
+import UserModel from "../models/UserModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { setAuthCookie, deleteAuthCookie } from "../helpers/cookieHelper.js";
@@ -16,7 +16,7 @@ class AuthController {
       const { email, password, role } = req.body;
 
       //1. Buscando el mail del supuesto usuario en la base de datos.
-      const userToAuth = await AuthModel.findOne({email})
+      const userToAuth = await UserModel.findOne({email})
       if (!userToAuth) return res.status(401).json({ message: "Usuario no encontrado"});
 
       //2. verificando la constraseña del supuesto usuario en la base de datos.
@@ -55,7 +55,7 @@ class AuthController {
       const { email, password, nombre, apellido, telefono, direccion, fechaNacimiento } = req.body;
   
       // Verificar si el usuario ya existe
-      const existingUser = await AuthModel.findOne({ email });
+      const existingUser = await UserModel.findOne({ email });
       if (existingUser) {
         return res.status(400).json({ message: "El email ya está registrado" });
       }
@@ -64,7 +64,7 @@ class AuthController {
       const hashedPassword = await bcrypt.hash(password, 10);
   
       // Crear el usuario con todos los datos
-      const newUser = new AuthModel({
+      const newUser = new UserModel({
         email,
         password: hashedPassword,
         nombre,
@@ -95,7 +95,7 @@ class AuthController {
   async getMe(req, res) {
     try {
       // req.user ya contiene los datos del token decodificado (id, email, role)
-      const user = await AuthModel.findById(req.user.id).select('-password');
+      const user = await UserModel.findById(req.user.id).select('-password');
       if (!user) {
         return res.status(404).json({ message: "Usuario no encontrado" });
       }

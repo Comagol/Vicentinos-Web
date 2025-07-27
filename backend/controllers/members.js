@@ -1,4 +1,3 @@
-import MemberModel from "../models/membersModels.js";
 import UserModel from "../models/UserModel.js";
 
 //Clase para manejar los metodos de los socios
@@ -10,7 +9,7 @@ class MemberController {
     //Metodo para obtener todos los socios
     async getAllMembers(req, res) {
         try {
-            const members = await MemberModel.find();
+            const members = await UserModel.find();
             res.status(200).json(members);
         } catch (error) {
             res.status(500).json({ message: error.message });
@@ -21,7 +20,7 @@ class MemberController {
     async getMemberById(req, res) {
         try {
             const {id} =req.params;
-            const member = await MemberModel.findById(id);
+            const member = await UserModel.findById(id);
             if (!member) {
                 return res.status(404).json({ message: "Socio no encontrado"});
             }
@@ -36,12 +35,12 @@ class MemberController {
         try {
             const { firstName, lastName, email, phone, birthDate, DNI, address, city, zipCode, memberId, signUpDate } = req.body;
             const member = { firstName, lastName, email, phone, birthDate, DNI, address, city, zipCode, memberId, signUpDate };
-            const members = await MemberModel.find();   
+            const members = await UserModel.find();   
             if (members.some(member => member.DNI === DNI)) {
                 return res.status(400).json({ message: "Ya existe un socio con ese DNI"});
             }
             else {
-                const newMember = await MemberModel.create(member);
+                const newMember = await UserModel.create(member);
                 res.status(201).json(newMember);
             }
         } catch (error) {
@@ -62,7 +61,7 @@ class MemberController {
             
             const userId = req.user.id;
 
-            const user = await AuthModel.findById(userId);
+            const user = await UserModel.findById(userId);
             if (!user) {
                 return res.status(404).json({ message: "Usuario no encontrado" });
             }
@@ -104,12 +103,12 @@ class MemberController {
     async deleteMember(req, res) {
         try {
             const {id} = req.params;
-            const member = await MemberModel.findById(id);
+            const member = await UserModel.findById(id);
             if (!member) {
                 return res.status(404).json({ message: "Socio no encontrado"});
             }
             else {
-                await MemberModel.delete(id);
+                await UserModel.delete(id);
                 res.status(200).json({ message: "Socio eliminado correctamente"});
             }
         } catch (error) {
@@ -120,7 +119,7 @@ class MemberController {
     //Metodo para obtener la informacion del socio autenticado
     async getCurrentMember(req, res) {
         try {
-            const user = await AuthModel.findById(req.user.id).select('-password');
+            const user = await UserModel.findById(req.user.id).select('-password');
             
             if (!user) {
                 return res.status(404).json({ message: "Usuario no encontrado" });
