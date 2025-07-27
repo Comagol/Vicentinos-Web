@@ -22,6 +22,11 @@ export const loginService = {
     return response.data;
   },
 
+  verifyAuth: async () => {
+    const response = await api.get("/me", { withCredentials: true });
+    return response.data;
+  },
+
   register: async (data: RegisterData) => {
     const response = await api.post("/register", data, { withCredentials: true });
     return response.data;
