@@ -1,66 +1,77 @@
 import React, { useState } from 'react';
 import {
   Box,
-  Button,
   Container,
-  Divider,
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Text,
-  VStack,
-  HStack,
-  Heading,
-  useToast,
   Card,
   CardBody,
-  IconButton,
-  Link,
-  Flex,
   Image,
+  Heading,
+  Text,
+  VStack,
 } from '@chakra-ui/react';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import LoginForm from '../components/LoginForm';
+import RegisterForm from '../components/RegisterForm';
+import ForgotPasswordForm from '../components/ForgotPasswordForm';
+
+type FormType = 'login' | 'register' | 'forgot-password';
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [isForgotPassword, setIsForgotPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const toast = useToast();
+  const [currentForm, setCurrentForm] = useState<FormType>('login');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Aquí irá la lógica de autenticación
-    toast({
-      title: 'Iniciando sesión...',
-      status: 'info',
-      duration: 2000,
-      isClosable: true,
-    });
+  const handleSwitchToRegister = () => {
+    setCurrentForm('register');
   };
 
-  const handleGoogleLogin = () => {
-    // Aquí irá la lógica de autenticación con Google
-    toast({
-      title: 'Iniciando sesión con Google...',
-      status: 'info',
-      duration: 2000,
-      isClosable: true,
-    });
+  const handleSwitchToLogin = () => {
+    setCurrentForm('login');
   };
 
-  const handleForgotPassword = () => {
-    // Aquí irá la lógica de recuperación de contraseña
-    toast({
-      title: 'Enviando email de recuperación...',
-      status: 'info',
-      duration: 2000,
-      isClosable: true,
-    });
+  const handleSwitchToForgotPassword = () => {
+    setCurrentForm('forgot-password');
+  };
+
+  const getFormTitle = () => {
+    switch (currentForm) {
+      case 'login':
+        return 'Inicia sesión en tu cuenta';
+      case 'register':
+        return 'Crea tu cuenta';
+      case 'forgot-password':
+        return 'Recupera tu contraseña';
+      default:
+        return 'Inicia sesión en tu cuenta';
+    }
+  };
+
+  const renderForm = () => {
+    switch (currentForm) {
+      case 'login':
+        return (
+          <LoginForm
+            onSwitchToRegister={handleSwitchToRegister}
+            onSwitchToForgotPassword={handleSwitchToForgotPassword}
+          />
+        );
+      case 'register':
+        return (
+          <RegisterForm
+            onSwitchToLogin={handleSwitchToLogin}
+          />
+        );
+      case 'forgot-password':
+        return (
+          <ForgotPasswordForm
+            onSwitchToLogin={handleSwitchToLogin}
+          />
+        );
+      default:
+        return (
+          <LoginForm
+            onSwitchToRegister={handleSwitchToRegister}
+            onSwitchToForgotPassword={handleSwitchToForgotPassword}
+          />
+        );
+    }
   };
 
   return (
@@ -100,166 +111,13 @@ const Login = () => {
                   Club Vicentinos
                 </Heading>
                 <Text color="gray.600" fontSize="sm">
-                  {isForgotPassword 
-                    ? 'Recupera tu contraseña' 
-                    : 'Inicia sesión en tu cuenta'
-                  }
+                  {getFormTitle()}
                 </Text>
               </Box>
             </VStack>
 
-            {/* Google Login Button */}
-            {!isForgotPassword && (
-              <>
-                <Button
-                  w="full"
-                  size="lg"
-                  variant="outline"
-                  leftIcon={<FontAwesomeIcon icon={faGoogle} />}
-                  onClick={handleGoogleLogin}
-                  mb={6}
-                  _hover={{
-                    bg: 'gray.50',
-                    borderColor: 'gray.300',
-                  }}
-                >
-                  Continuar con Google
-                </Button>
-
-                <HStack my={6}>
-                  <Divider />
-                  <Text fontSize="sm" color="gray.500" whiteSpace="nowrap">
-                    o continúa con
-                  </Text>
-                  <Divider />
-                </HStack>
-              </>
-            )}
-
-            {/* Form */}
-            <form onSubmit={handleSubmit}>
-              <VStack spacing={4}>
-                <FormControl isRequired>
-                  <FormLabel color="gray.700" fontSize="sm" fontWeight="medium">
-                    Correo electrónico
-                  </FormLabel>
-                  <Input
-                    type="email"
-                    placeholder="tu@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    size="lg"
-                    borderRadius="md"
-                    _focus={{
-                      borderColor: 'primary',
-                      boxShadow: '0 0 0 1px var(--chakra-colors-primary)',
-                    }}
-                  />
-                </FormControl>
-
-                {!isForgotPassword && (
-                  <FormControl isRequired>
-                    <FormLabel color="gray.700" fontSize="sm" fontWeight="medium">
-                      Contraseña
-                    </FormLabel>
-                    <InputGroup size="lg">
-                      <Input
-                        type={showPassword ? 'text' : 'password'}
-                        placeholder="••••••••"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        borderRadius="md"
-                        _focus={{
-                          borderColor: 'primary',
-                          boxShadow: '0 0 0 1px var(--chakra-colors-primary)',
-                        }}
-                      />
-                      <InputRightElement>
-                        <IconButton
-                          aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
-                          icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => setShowPassword(!showPassword)}
-                        />
-                      </InputRightElement>
-                    </InputGroup>
-                  </FormControl>
-                )}
-
-                {/* Forgot Password Link */}
-                {!isForgotPassword && (
-                  <Flex w="full" justify="flex-end">
-                    <Link
-                      color="primary"
-                      fontSize="sm"
-                      fontWeight="medium"
-                      onClick={() => setIsForgotPassword(true)}
-                      _hover={{ textDecoration: 'underline' }}
-                    >
-                      ¿Olvidaste tu contraseña?
-                    </Link>
-                  </Flex>
-                )}
-
-                {/* Submit Button */}
-                <Button
-                  type="submit"
-                  w="full"
-                  size="lg"
-                  bg="primary"
-                  color="white"
-                  _hover={{
-                    bg: 'primary',
-                    transform: 'translateY(-1px)',
-                    boxShadow: 'lg',
-                  }}
-                  _active={{
-                    bg: 'primary',
-                    transform: 'translateY(0)',
-                  }}
-                  mt={4}
-                >
-                  {isForgotPassword 
-                    ? 'Enviar email de recuperación' 
-                    : 'Iniciar sesión'
-                  }
-                </Button>
-              </VStack>
-            </form>
-
-            {/* Toggle to Register */}
-            {!isForgotPassword && (
-              <HStack justify="center" mt={6}>
-                <Text color="gray.600" fontSize="sm">
-                  ¿No tienes una cuenta?
-                </Text>
-                <Link
-                  color="primary"
-                  fontSize="sm"
-                  fontWeight="medium"
-                  href="/register"
-                  _hover={{ textDecoration: 'underline' }}
-                >
-                  Regístrate
-                </Link>
-              </HStack>
-            )}
-
-            {/* Back to Login from Forgot Password */}
-            {isForgotPassword && (
-              <HStack justify="center" mt={6}>
-                <Link
-                  color="primary"
-                  fontSize="sm"
-                  fontWeight="medium"
-                  onClick={() => setIsForgotPassword(false)}
-                  _hover={{ textDecoration: 'underline' }}
-                >
-                  ← Volver al inicio de sesión
-                </Link>
-              </HStack>
-            )}
+            {/* Render the appropriate form */}
+            {renderForm()}
           </CardBody>
         </Card>
       </Container>

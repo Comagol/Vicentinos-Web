@@ -23,7 +23,7 @@ export const loginService = {
   },
 
   verifyAuth: async () => {
-    const response = await api.get("/me", { withCredentials: true });
+    const response = await api.get("/me", {withCredentials: true});
     return response.data;
   },
 

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, type ReactNode } from 'react';
 import loginService from '../services/LoginService';
 
 // Interfaces
@@ -40,7 +40,7 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Función para verificar autenticación
@@ -68,10 +68,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setLoading(true);
       setError(null);
       
-      await loginService.login({ email, password });
+      const response = await loginService.login({ email, password });
       
-      // Después del login exitoso, verificamos la autenticación
-      await checkAuth();
+      // Usar los datos del usuario que vienen en la respuesta del login
+      setUser(response.user);
+      setIsAuthenticated(true);
+      setError(null);
       
     } catch (error: any) {
       setError(error.response?.data?.message || 'Error al iniciar sesión');
@@ -102,10 +104,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setError(null);
   };
 
-  // Verificar autenticación al cargar la app
-  useEffect(() => {
-    checkAuth();
-  }, []);
 
   const value: AuthContextType = {
     isAuthenticated,

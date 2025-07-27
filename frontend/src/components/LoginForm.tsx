@@ -18,7 +18,7 @@ import {
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import loginService from '../services/LoginService';
+import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 interface LoginFormProps {
@@ -36,13 +36,22 @@ const LoginForm: React.FC<LoginFormProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const navigate = useNavigate();
+  
+  // Usar el contexto de autenticación
+  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Iniciando login...'); // Debug log
     setIsLoading(true);
 
     try {
-      await loginService.login({ email, password });
+      console.log('Llamando a login con:', { email, password }); // Debug log
+      
+      // Usar la función login del contexto en lugar del servicio directamente
+      await login(email, password);
+      
+      console.log('Login exitoso!'); // Debug log
       
       toast({
         title: '¡Bienvenido!',
@@ -54,6 +63,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
       navigate('/');
     } catch (error: any) {
+      console.error('Error en login:', error); // Debug log
       toast({
         title: 'Error al iniciar sesión',
         description: error.response?.data?.message || 'Credenciales incorrectas',

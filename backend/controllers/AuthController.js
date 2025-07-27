@@ -29,8 +29,17 @@ class AuthController {
       //4. Seteo la cookie
       setAuthCookie(res, token);
 
-      //5. Respuesta al servidor
-      res.json({ message: "Login exitoso" });
+      //5. Respuesta con datos del usuario (sin contraseña)
+      const userData = {
+        id: userToAuth.id,
+        email: userToAuth.email,
+        role: userToAuth.role
+      };
+      
+      res.json({ 
+        message: "Login exitoso",
+        user: userData 
+      });
     } catch (error) {
       res.status(500).json({ message: "Error en el servidor" });
     }
