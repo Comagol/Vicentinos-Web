@@ -52,32 +52,45 @@ class AuthController {
 
   async register(req, res) {
     try {
-      const {email, password} = req.body;
-
-      // verifico si el usuario ya existe.
+      const { email, password, nombre, apellido, telefono, direccion, fechaNacimiento } = req.body;
+  
+      // Verificar si el usuario ya existe
       const existingUser = await AuthModel.findOne({ email });
-      if(existingUser) {
-        return res.status(400).json({ message: "El email ya esta registrado"});
+      if (existingUser) {
+        return res.status(400).json({ message: "El email ya está registrado" });
       }
-
-      // Hasheo la contraseña
+  
+      // Hashear la contraseña
       const hashedPassword = await bcrypt.hash(password, 10);
-
-      // Creo el usuario
+  
+      // Crear el usuario con todos los datos
       const newUser = new AuthModel({
         email,
         password: hashedPassword,
+        nombre,
+        apellido,
+        telefono,
+        direccion,
+        fechaNacimiento: fechaNacimiento ? new Date(fechaNacimiento) : undefined,
       });
-
+  
       await newUser.save();
-
-      //luego voy a agregar que se genere el token
-
-      res.status(201).json({ message: "usuario registrado exitosamente" });
+  
+      res.status(201).json({ 
+        message: "Usuario registrado exitosamente",
+        user: {
+          id: newUser._id,
+          email: newUser.email,
+          nombre: newUser.nombre,
+          apellido: newUser.apellido,
+          numeroSocio: newUser.numeroSocio
+        }
+      });
     } catch (error) {
-      res.status(500).json({ message: "Error en el servidor"});
+      console.error('Error en registro:', error);
+      res.status(500).json({ message: "Error en el servidor" });
     }
-  };
+  }
 
   async getMe(req, res) {
     try {

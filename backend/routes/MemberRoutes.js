@@ -20,4 +20,10 @@ router.put("/:id", authMiddleware, MemberController.updateMember);
 // Delete = eliminar un socio
 router.delete("/:id", authMiddleware, MemberController.deleteMember);
 
+// Ruta para obtener información del miembro actual (PROTEGIDA)
+router.get("/current", authMiddleware, MemberController.getCurrentMember);
+
+// Ruta para actualizar información del miembro (PROTEGIDA)
+router.put("/current", authMiddleware, MemberController.updateMember);
+
 export default router;

@@ -1,4 +1,5 @@
 import MemberModel from "../models/membersModels.js";
+import UserModel from "../models/UserModel.js";
 
 //Clase para manejar los metodos de los socios
 class MemberController {
@@ -51,18 +52,51 @@ class MemberController {
     //Metodo para actualizar valores de un socio
     async updateMember(req, res) {
         try {
-            const {id} = req.params;
-            const { firstName, lastName, email, birthDate, DNI, phone, address, city, zipCode} = req.body;
-            const member = await MemberModel.findById(id);
-            if (!member) {
-                return res.status(404).json({ message: "Socio no encontrado"});
-        }
-        else {
-                const updateMember = await MemberModel.update(id, member);
-                res.status(200).json(updateMember);
+            const { 
+                nombre, 
+                apellido, 
+                telefono, 
+                direccion, 
+                fechaNacimiento 
+            } = req.body;
+            
+            const userId = req.user.id;
+
+            const user = await AuthModel.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: "Usuario no encontrado" });
             }
+
+            // Actualizar campos permitidos
+            if (nombre) user.nombre = nombre;
+            if (apellido) user.apellido = apellido;
+            if (telefono) user.telefono = telefono;
+            if (direccion) user.direccion = direccion;
+            if (fechaNacimiento) user.fechaNacimiento = new Date(fechaNacimiento);
+
+            await user.save();
+
+            res.json({ 
+                message: "Información actualizada correctamente",
+                member: {
+                    id: user._id,
+                    email: user.email,
+                    role: user.role,
+                    nombre: user.nombre,
+                    apellido: user.apellido,
+                    nombreCompleto: user.nombreCompleto,
+                    telefono: user.telefono,
+                    direccion: user.direccion,
+                    fechaNacimiento: user.fechaNacimiento,
+                    numeroSocio: user.numeroSocio,
+                    categoria: user.categoria,
+                    estado: user.estado,
+                    fechaRegistro: user.fechaRegistro
+                }
+            });
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            console.error('Error actualizando datos del miembro:', error);
+            res.status(500).json({ message: "Error en el servidor" });
         }
     };
 
@@ -80,6 +114,42 @@ class MemberController {
             }
         } catch (error) {
             res.status(500).json({ message: error.message});
+        }
+    };
+
+    //Metodo para obtener la informacion del socio autenticado
+    async getCurrentMember(req, res) {
+        try {
+            const user = await AuthModel.findById(req.user.id).select('-password');
+            
+            if (!user) {
+                return res.status(404).json({ message: "Usuario no encontrado" });
+            }
+
+            const memberData = {
+                id: user._id,
+                email: user.email,
+                role: user.role,
+                nombre: user.nombre,
+                apellido: user.apellido,
+                nombreCompleto: user.nombreCompleto,
+                telefono: user.telefono,
+                direccion: user.direccion,
+                fechaNacimiento: user.fechaNacimiento,
+                numeroSocio: user.numeroSocio,
+                categoria: user.categoria,
+                estado: user.estado,
+                fechaRegistro: user.fechaRegistro,
+                foto: user.foto,
+                observaciones: user.observaciones,
+                createdAt: user.createdAt,
+                updatedAt: user.updatedAt
+            };
+
+            res.json({ member: memberData });
+        } catch (error) {
+            console.error('Error obteniendo datos del miembro:', error);
+            res.status(500).json({ message: "Error en el servidor" });
         }
     }
 }
