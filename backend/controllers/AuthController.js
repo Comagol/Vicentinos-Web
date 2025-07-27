@@ -69,6 +69,19 @@ class AuthController {
       res.status(500).json({ message: "Error en el servidor"});
     }
   };
+
+  async getMe(req, res) {
+    try {
+      // req.user ya contiene los datos del token decodificado (id, email, role)
+      const user = await AuthModel.findById(req.user.id).select('-password');
+      if (!user) {
+        return res.status(404).json({ message: "Usuario no encontrado" });
+      }
+      res.json({ user });
+    } catch (error) {
+      res.status(500).json({ message: "Error en el servidor" });
+    }
+  };
 };
 
 export default new AuthController();
